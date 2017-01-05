@@ -1,0 +1,16 @@
+/* SMACSS categories */
+/* MODULES */
+/* END MODULES */
+/* Helpers */
+.hide {
+  display: none;
+}
+.bg-clip-text {
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+body {
+  background-color: #808080;
+}
