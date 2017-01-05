@@ -3,7 +3,7 @@ var router = express.Router();
 const path = require('path');
 
 router.get('/', function (req, res) {
-  res.render ('home', { title: 'Express Starter', message: 'Running. . .'});
+  res.render ('index', { title: 'Code Dreaming Ninja', message: 'Hello code dreaming ninja!'});
 });
 
 module.exports = router;

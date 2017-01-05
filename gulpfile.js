@@ -15,9 +15,9 @@ gulp.task('html', function() {
   .pipe(reload({ stream: true }));
 });
 
-// Handlebars task
-gulp.task('hbs', function() {
-  gulp.src('./views/**/*.hbs')
+// PUG task
+gulp.task('pug', function() {
+  gulp.src('./views/**/*.pug')
   .pipe(reload({ steam: true }));
 });
 
@@ -87,7 +87,7 @@ gulp.task('browser-sync', ['nodemon'], function() {
 // Watch task
 gulp.task('watch', function() {
   gulp.watch('./views/**/*.html', ['html']);
-  gulp.watch('./views/**/*.hbs', ['hbs']);
+  gulp.watch('./views/**/*.pug', ['pug']);
   gulp.watch('./public/css/**/*.styl', ['stylus']);
   gulp.watch('./public/js/**/*.js', ['script']);
 });

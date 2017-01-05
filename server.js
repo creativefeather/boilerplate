@@ -1,17 +1,8 @@
-var express = require('express'),
-    exphbs = require('express-handlebars');
-
+var express = require('express');
 var app = express();
 
 // View Engine
-var hbs = exphbs.create({ 
-  extname: '.hbs',
-  defaultLayout: 'main'
-});
-app.engine('.hbs', hbs.engine); // register hbs engine
-app.set('view engine', '.hbs');
-// Note: Setting the app's "view engine" setting will make that value the default file extension used for looking up views.
-
+app.set('view engine', 'pug');
 
 // Routes
 var router = require('./router');
