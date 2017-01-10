@@ -1,0 +1,9 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "allowJs": true,
+    "outDir": "../../dist/server",
+    "sourceMap": false,
+    "target": "ES6"
+  }
+}

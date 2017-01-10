@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "commonjs",
+    "outDir": "../../dist/client",
+    "target": "es5"
+  },
+  "typeAcquisition": {
+    "enable": true
+  }
+}
