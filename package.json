@@ -2,7 +2,7 @@
   "name": "starter.example.com",
   "version": "0.1.0",
   "description": "",
-  "main": "./dist/app.js",
+  "main": "./dist/server/app.js",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
