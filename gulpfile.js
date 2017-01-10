@@ -49,9 +49,15 @@ gulp.task('stylus', function() {
     .pipe(gulp.dest('./dist/client/css'));
 });
 
+//
+// Add live-reload tasks
+//
+require('./gulp-live-reload')(gulp);
+
+
 // Watch Task
 gulp.task('watch', function() {
-  gulp.watch('./src/client/css/style.styl', ['stylus']);
+  gulp.watch('./src/client/css/**/*.styl', ['stylus']);
   gulp.watch('./src/server/**/*.ts', ['typescript-server']);
   gulp.watch('./src/client/**/*.ts', ['typescript-client']);
 });
@@ -60,6 +66,7 @@ gulp.task('watch', function() {
 gulp.task('default', [
   'stylus', 
   'typescript-server', 
-  'typescript-client', 
+  'typescript-client',
+  'browser-sync', 
   'watch'
 ]);
