@@ -11,7 +11,8 @@
       "program": "${workspaceRoot}\\dist\\server\\app.js",
       "cwd": "${workspaceRoot}",
       "outFiles": [],
-      "sourceMaps": true
+      "sourceMaps": true,
+      "preLaunchTask": "tsc"
     },
     {
       "type": "node",

@@ -2,6 +2,8 @@ var browserSync = require('browser-sync'),
     nodemon     = require('gulp-nodemon'),
     reload      = browserSync.reload;
 
+var BROWSER_SYNC_RELOAD_DELAY = 2000;
+
 module.exports = function(gulp) {
 
 // Nodemon task

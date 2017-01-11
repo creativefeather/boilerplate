@@ -40,6 +40,10 @@ gulp.task('typescript-client', function() {
   return tsClientResult.js.pipe(gulp.dest('./dist/client'));
 });
 
+// Compile all Typescript
+gulp.task('tsc', ['typescript-client', 'typescript-server']);
+
+
 // Stylus Task
 // -- Runs stylus on specified files
 gulp.task('stylus', function() {
