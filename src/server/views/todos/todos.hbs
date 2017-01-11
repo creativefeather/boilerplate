@@ -1,0 +1,14 @@
+<div id="todo-table">
+  <form>
+    <input type="text" name="item" placeholder="Add new item. . ." required />
+    <button type="submit">Add Item</button>
+  </form>
+  
+  <ul class="todos">
+    {{#each todos }}
+      <li id="{{ this._id }}">
+        {{ this.item }}
+      </li>
+    {{/each}}
+  </ul>
+</div>

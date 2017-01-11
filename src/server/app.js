@@ -6,11 +6,17 @@
  * and routes. 
  */
 
-var fs      = require('fs'),
-    express = require('express'),
-    exphbs  = require('express-handlebars');
+var fs         = require('fs'),
+    bodyParser = require('body-parser'),
+    express    = require('express'),
+    exphbs     = require('express-handlebars');
 
 var app = express();
+
+//
+// *** MongoDb ***
+//
+app.set('db.uri', 'mongodb://<username>:<password>@localhost:27017/test');
 
 //
 // *** Views ***
@@ -31,6 +37,11 @@ app.set('views', './src/server/views');
 app.set('view engine', '.hbs');
 // Note: Setting the app's "view engine" setting will make that value
 // the default file extension used for looking up views.
+
+//
+// *** Middleware ***
+//
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //
 // *** Routes ***
