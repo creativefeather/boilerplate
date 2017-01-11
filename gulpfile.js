@@ -12,24 +12,36 @@ var gulp = require('gulp'),
   plumber = require('gulp-plumber'),
   stylus = require('gulp-stylus');
 
-// Stylus Task
-// -- Runs stylus on specified files
+/**
+ * Stylus @task stylus
+ * Process style.styl then reload browser
+ */
 gulp.task('stylus', function() {
   gulp.src('./src/client/css/style.styl')
     .pipe(plumber())
     .pipe(stylus())
-    .pipe(gulp.dest('./dist/client/css'));
+    .pipe(gulp.dest('./src/client/css'))
+    .pipe(liveReload.reload({ stream: true }));
 });
+
+/**
+ * Handlebars @task hbs
+ * Restart server and reload browser
+ */
 
 //
 // Add live-reload tasks
 //
-require('./gulp.live-reload')(gulp);
+const liveReload = require('./gulp.live-reload');
+liveReload(gulp);
 
 
 // Watch Task
 gulp.task('watch', function() {
   gulp.watch('./src/client/css/**/*.styl', ['stylus']);
+  gulp.watch('./src/server/views/**/*.hbs', function() {
+    liveReload.reload({ stream: false });
+  });
 });
 
 // Default Task

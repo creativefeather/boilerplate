@@ -39,7 +39,7 @@ app.set('view engine', '.hbs');
 // @link http://expressjs.com/en/guide/routing.html
 
 // Serve static resources from ./src/client
-app.use('/static', express.static('src/client'));
+app.use('/static', express.static('./src/client'));
 
 // Add controllers
 var controllers = fs.readdirSync('./src/server/controllers');

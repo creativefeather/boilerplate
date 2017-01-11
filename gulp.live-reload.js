@@ -2,7 +2,7 @@ var browserSync = require('browser-sync'),
     nodemon     = require('gulp-nodemon'),
     reload      = browserSync.reload;
 
-var BROWSER_SYNC_RELOAD_DELAY = 2000;
+var BROWSER_SYNC_RELOAD_DELAY = 3300;
 
 module.exports = function(gulp) {
 
@@ -15,7 +15,9 @@ gulp.task('nodemon', function (cb) {
     script: './src/server/app.js',
 
     // watch core server file(s) that require server restart on change
-    watch: ['./src/server/app.js']
+    watch: [
+      'src/server/**/*.js'
+    ]
   })
     .on('start', function onStart() {
       // ensure start only got called once
@@ -55,3 +57,5 @@ gulp.task('browser-sync', ['nodemon'], function() {
 });
 
 } // End module.exports
+
+module.exports.reload = reload;
