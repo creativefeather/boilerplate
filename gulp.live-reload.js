@@ -12,11 +12,10 @@ gulp.task('nodemon', function (cb) {
   return nodemon({
     
     // nodemon our expressjs server
-    script: './dist/server/app.js',
+    script: './src/server/app.js',
 
     // watch core server file(s) that require server restart on change
-    watch: ['./dist/server/app.js', 
-            './dist/server/router' ]
+    watch: ['./src/server/app.js']
   })
     .on('start', function onStart() {
       // ensure start only got called once
@@ -33,7 +32,10 @@ gulp.task('nodemon', function (cb) {
     });
 });
 
-// Browser-Sync task
+/**
+ * @task Browser-Sync task
+ * @todo Remove hard-coded proxy port.  Can Process.ENV be used in Gulp?
+ */
 gulp.task('browser-sync', ['nodemon'], function() {
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
   browserSync({

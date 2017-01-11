@@ -8,19 +8,14 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceRoot}\\dist\\server\\app.js",
-      "cwd": "${workspaceRoot}",
-      "outFiles": [],
-      "sourceMaps": true,
-      "preLaunchTask": "tsc"
+      "program": "${workspaceRoot}\\src\\server\\app.js",
+      "cwd": "${workspaceRoot}"
     },
     {
       "type": "node",
       "request": "attach",
       "name": "Attach to Process",
-      "port": 5858,
-      "outFiles": [],
-      "sourceMaps": true
+      "port": 5858
     }
   ]
 }

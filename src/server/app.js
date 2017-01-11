@@ -35,12 +35,14 @@ app.set('view engine', '.hbs');
 //
 // *** Routes ***
 //
+// @link http://expressjs.com/en/4x/api.html#router
+// @link http://expressjs.com/en/guide/routing.html
 
-// Serve static resources from ./dist/client
-app.use('/static', express.static('dist/client'));
+// Serve static resources from ./src/client
+app.use('/static', express.static('src/client'));
 
 // Add controllers
-var controllers = fs.readdirSync('./dist/server/controllers');
+var controllers = fs.readdirSync('./src/server/controllers');
 controllers.forEach(function(name) {
     require('./controllers/' + name)(app);
 });
