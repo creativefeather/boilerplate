@@ -8,6 +8,7 @@ var _require = require('electron'),
 
 var path = require('path');
 var url = require('url');
+var client = require('electron-connect').client;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -34,6 +35,8 @@ function createWindow() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  client.create(mainWindow);
 };
 
 // This method will be called when Electron has finished

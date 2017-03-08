@@ -1,32 +1,43 @@
+'use strict'
+const path = require('path');
+
 const gulp = require('gulp'),
+      changed = require('gulp-changed'),
       plumber = require('gulp-plumber'),
-      babel = require('gulp-babel');
+      babel = require('gulp-babel'),
+      electron = require('electron-connect').server.create();
 
 const dest = 'dist';
 
 // HTML
 let htmlGlob = 'src/renderers/**/*.html';
-gulp.task('html', function() {
+function html() {
   return gulp.src(htmlGlob)
+    .pipe(changed(dest))
     .pipe(gulp.dest(dest));
-})
+}
+gulp.task('html', html);
 
 // CSS
 let cssGlob = 'src/renderers/**/*.css';
-gulp.task('css', function() {
+function css () {
   return gulp.src(cssGlob)
+    .pipe(changed(dest))
     .pipe(gulp.dest(dest));
-})
+}
+gulp.task('css', css);
 
 // JS
-let jsGlob = ['src/renderers/**/*.js', 'src/renderers/**/*.jsx', 'src/main.js'];
-//let jsGlob = 'src/main.js';
-gulp.task('js', function() {
+let mainProc = 'src/main.js';
+let jsGlob = ['src/renderers/**/*.js', 'src/renderers/**/*.jsx', mainProc];
+function js () {
   return gulp.src(jsGlob)
+    .pipe(changed(dest))
     .pipe(plumber())
     .pipe(babel())
     .pipe(gulp.dest(dest));
-});
+}
+gulp.task('js', js);
 
 /**
  *  Watch Task
@@ -36,8 +47,9 @@ gulp.task('watch', function() {
   gulp.watch(htmlGlob, function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     if (event.type === 'changed') {
-      gulp.src(event.path)
-        .pipe(gulp.dest(dest));
+      html();
+      
+      electron.reload();
     }
   });
 
@@ -45,8 +57,9 @@ gulp.task('watch', function() {
   gulp.watch(cssGlob, function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     if (event.type === 'changed') {
-      gulp.src(event.path)
-        .pipe(gulp.dest(dest));
+      css();
+      
+      electron.reload();
     }
   });
 
@@ -54,13 +67,24 @@ gulp.task('watch', function() {
   gulp.watch(jsGlob, function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     if (event.type === 'changed') {
-      gulp.src(event.path)
-        .pipe(plumber())
-        .pipe(babel())
-        .pipe(gulp.dest(dest));
+      js();
+      
+      if (event.path === path.join(__dirname, mainProc)) {
+        electron.restart();
+      }
+      else {
+        electron.reload();
+      }
     }
   });
 });
 
+// electron-connect
+gulp.task('serve', function() {
+  // Start browser process
+  electron.start();
+
+});
+
 gulp.task('build', ['html', 'css', 'js']);
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', ['build', 'serve', 'watch']);
