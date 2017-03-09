@@ -1,3 +1,4 @@
-const addon = require('bindings')('myaddon');
+//const addon = require('bindings')('myaddon');
+const addon = require('./myaddon');
 
-console.log(addon.length(process.argv[2]));
+console.log(addon.hello());

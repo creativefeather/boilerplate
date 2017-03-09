@@ -25,8 +25,6 @@ NAN_METHOD(Print) {
 }
 
 NAN_METHOD(Length) {
-  Nan::HandleScope scope;
-
   Nan::MaybeLocal<String> mStr = Nan::To<String>(info[0]);
   if (!mStr.IsEmpty()) {
     Local<String> str = mStr.ToLocalChecked();
@@ -36,6 +34,13 @@ NAN_METHOD(Length) {
     Local<Number> length = Nan::New<Number>(len);
     info.GetReturnValue().Set(length);
   }
+}
+
+NAN_METHOD(Hello) {
+  MaybeLocal<String> mMsg = Nan::New("Hello World!");
+  Local<String> msg = mMsg.ToLocalChecked();
+
+  info.GetReturnValue().Set(msg);
 }
 
 // void Method(const FunctionCallbackInfo<Value>& args) {
@@ -51,6 +56,10 @@ NAN_MODULE_INIT(Init) {
   Nan::Set(target,
            Nan::New("length").ToLocalChecked(),
            Nan::GetFunction(Nan::New<FunctionTemplate>(Length)).ToLocalChecked());
+  
+  Nan::Set(target,
+           Nan::New("hello").ToLocalChecked(),
+           Nan::GetFunction(Nan::New<FunctionTemplate>(Hello)).ToLocalChecked());
 }
 
 // void Init(Local<Object> exports) {
