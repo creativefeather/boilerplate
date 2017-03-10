@@ -47,7 +47,7 @@ let nativeModules = [
   'myaddon'
 ];
 let nativeModPath = path.join(__dirname, 'src/native');
-//let nativeGlob = ['src/native/'];
+let nativeDest = path.join(__dirname, 'node_modules/@native');
 function rebuildMod(mod) {
   let modulePath = path.join(nativeModPath, mod);
 
@@ -62,7 +62,7 @@ function rebuildMod(mod) {
     path.join(nativeModPath, mod + '/build/Release/' + mod + '.node')
   ];
   gulp.src(glob)
-    .pipe(gulp.dest(path.join(dest, 'native/' + mod)));
+    .pipe(gulp.dest(path.join(nativeDest, mod)));
 }
 
 function native() {

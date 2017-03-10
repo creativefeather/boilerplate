@@ -37,7 +37,7 @@ NAN_METHOD(Length) {
 }
 
 NAN_METHOD(Hello) {
-  MaybeLocal<String> mMsg = Nan::New("Hello World!");
+  MaybeLocal<String> mMsg = Nan::New("Hello Native World!");
   Local<String> msg = mMsg.ToLocalChecked();
 
   info.GetReturnValue().Set(msg);
