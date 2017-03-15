@@ -2,24 +2,26 @@
   "name": "quick-dev",
   "version": "0.1.0",
   "description": "Boilerplate for quickly building a modular section of a website.",
-  "main": "index.js",
-  "author": "",
+  "main": "./index.js",
+  "author": "Jesse Bird <creativefeather@outlook.com> (http://codedreaming.ninja)",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "build": "webpack"
   },
   "dependencies": {
+    "draft-js": "^0.10.0",
     "express": "^4.14.1",
     "pug": "^2.0.0-beta11",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
-    "babel-core": "^6.24.0",
+    "babel-core": "^6.23.1",
     "babel-loader": "^6.4.0",
     "babel-plugin-transform-class-properties": "^6.23.0",
-    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "browser-sync": "^2.18.8",
     "gulp": "^3.9.1",

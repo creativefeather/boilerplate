@@ -1,6 +1,11 @@
+const path = require('path');
+
 var gulp = require('gulp'),
     stylus = require('gulp-stylus'),
+    sourcemaps = require('gulp-sourcemaps'),
     plumber = require('gulp-plumber'),
+    gulpWebpack = require('gulp-webpack'),
+    webpack = require('webpack'),
     browserSync = require("browser-sync"),
     nodemon = require('gulp-nodemon'),
     reload = browserSync.reload;
@@ -9,38 +14,55 @@ var gulp = require('gulp'),
 // connected to browser-sync after restarting nodemon
 var BROWSER_SYNC_RELOAD_DELAY = 0;
 
-// HTML task
-gulp.task('html', function() {
-  gulp.src('./views/**/*.html')
-  .pipe(reload({ stream: true }));
-});
+const webpackConfig = require('./webpack.config');
+const dest = path.join(__dirname, './out');
 
-// Stylus task
+/**
+ * HTML
+ */
+let htmlGlob = [
+  '../*.@(pug|html|htm)',
+  './views/*.@(pug|html|htm)'
+];
+
+/**
+ * CSS
+ */
 gulp.task('stylus', function() {
-  return gulp.src('./public/css/style.styl')
+  return gulp.src('../markdown-previewer.styl')
     .pipe(plumber())
-    .pipe(stylus())
-    .pipe(gulp.dest('./public/css'))
+    .pipe(sourcemaps.init())
+      .pipe(stylus())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest(path.join(dest, './css')))
     .pipe(reload({ stream: true }));
 });
 
 
-// Client javascript task
-gulp.task('script', function() {
-  gulp.src('./public/js/**/*.js')
-    .pipe(reload({ stream: true }));
+/**
+ * React
+ */
+gulp.task('react:bundle', function() {
+  gulp.src(webpackConfig.entry.mdPreviewer)
+    .pipe(gulpWebpack(webpackConfig, webpack))
+    .pipe(gulp.dest(webpackConfig.output.path))
+    .on('end', function() {
+      reload({ stream: false });
+    });
 });
 
-// Nodemon task
+/**
+ * Nodemon
+ */
 gulp.task('nodemon', function (cb) {
   var called = false;
   return nodemon({
 
     // nodemon our expressjs server
-    script: 'server.js',
+    script: 'index.js',
 
     // watch core server file(s) that require server restart on change
-    watch: ['server.js', 'router']
+    watch: ['index.js']
   })
     .on('start', function onStart() {
       // ensure start only got called once
@@ -58,7 +80,9 @@ gulp.task('nodemon', function (cb) {
 });
 
 
-// Browser-Sync task
+/**
+ * Browser-Sync
+ */
 gulp.task('browser-sync', ['nodemon'], function() {
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
   browserSync({
@@ -80,12 +104,18 @@ gulp.task('browser-sync', ['nodemon'], function() {
 
 // Watch task
 gulp.task('watch', function() {
-  gulp.watch('./views/**/*.html', ['html']);
-  gulp.watch('./views/**/*.hbs', ['hbs']);
-  gulp.watch('./public/css/**/*.styl', ['stylus']);
-  gulp.watch('./public/js/**/*.js', ['script']);
+  gulp.watch('../markdown-previewer.styl', ['stylus']);
+  gulp.watch('../*.@(js|jsx)', ['react:bundle']);
+  gulp.watch(htmlGlob, function() {
+    reload({ stream: false });
+  })
 });
 
 
 // Defalut task
-gulp.task('default', ['stylus', 'script', 'browser-sync', 'watch']);
+gulp.task('default', [
+  'stylus', 
+  'react:bundle', 
+  'browser-sync', 
+  'watch'
+]);

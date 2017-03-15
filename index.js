@@ -1,7 +1,9 @@
-'use strict'
-const router = require('./src/router');
-let timestamp = require('./src/timestamp');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-timestamp.router = router;
+import MarkdownPreviewer from './MarkdownPreviewer.jsx';
 
-module.exports = timestamp;
+ReactDOM.render(
+  (new MarkdownPreviewer()).render(),
+  document.getElementById('app')
+)
