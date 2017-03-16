@@ -1,7 +1,7 @@
 {
-  "name": "quick-dev",
+  "name": "react-applet-example",
   "version": "0.1.0",
-  "description": "Boilerplate for quickly building a modular section of a website.",
+  "description": "Example React boilerplate",
   "main": "./index.js",
   "author": "Jesse Bird <creativefeather@outlook.com> (http://codedreaming.ninja)",
   "license": "MIT",

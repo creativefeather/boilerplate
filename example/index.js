@@ -4,7 +4,7 @@ const path = require('path'),
 
 let app = express();
 
-app.set('port', process.env.PORT || 3777);
+app.set('port', process.env.PORT || 3000);
 
 /**
  * View Engine

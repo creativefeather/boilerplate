@@ -24,7 +24,8 @@ module.exports = {
           presets: [
             'babel-preset-react', 
             'babel-preset-es2015'
-          ].map(require.resolve)
+          ].map(require.resolve),
+          plugins: ['babel-plugin-transform-class-properties'].map(require.resolve)
         }
       }
     ]

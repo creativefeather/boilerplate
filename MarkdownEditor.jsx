@@ -7,15 +7,14 @@ class MarkdownEditor extends Component {
     super(props);
 
     this.state = { editorState: EditorState.createEmpty() };
-    this.handleKeyCommand = this.handleKeyCommand.bind(this);
-    this.onChange = this.onChange.bind(this);
   }
 
-  onChange (editorState) { 
+  onChange = (editorState) => {
+    console.log('onChange');
     this.setState({ editorState }) 
   }
 
-  handleKeyCommand(command) {
+  handleKeyCommand = (command) => {
     const newState = RichUtils.handleKeyCommand(
       this.state.editorState,
       command
@@ -28,7 +27,7 @@ class MarkdownEditor extends Component {
     return 'not-handled';
   }
 
-  _onBoldClick() {
+  _onBoldClick = () => {
     this.onChange(RichUtils.toggleInlineStyle(
       this.state.editorState, 'BOLD'
     ));
@@ -37,7 +36,7 @@ class MarkdownEditor extends Component {
   render() {
     return (
       <div>
-        <button onClick={this._onBoldClick.bind(this)}>Bold</button>
+        <button onClick={this._onBoldClick}>Bold</button>
         <Editor
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
