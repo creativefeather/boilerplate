@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Editor, EditorState, RichUtils } from 'draft-js';
+import marked from 'marked';
 
 export default
 class MarkdownEditor extends Component {
@@ -10,8 +11,11 @@ class MarkdownEditor extends Component {
   }
 
   onChange = (editorState) => {
-    console.log('onChange');
-    this.setState({ editorState }) 
+    this.setState({ editorState });
+    let content = editorState.getCurrentContent();
+    console.log(content);
+    let alias = marked(content.getPlainText());
+    document.getElementById('md').innerHTML = alias;
   }
 
   handleKeyCommand = (command) => {

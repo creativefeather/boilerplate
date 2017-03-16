@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 
 // we'd need a slight delay to reload browsers
 // connected to browser-sync after restarting nodemon
-var BROWSER_SYNC_RELOAD_DELAY = 2000;
+var BROWSER_SYNC_RELOAD_DELAY = 0;
 
 const webpackConfig = require('./webpack.config');
 const dest = path.join(__dirname, './out');
