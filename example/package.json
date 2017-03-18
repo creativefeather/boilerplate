@@ -1,7 +1,7 @@
 {
   "name": "react-applet-example",
   "version": "0.1.0",
-  "description": "Example React boilerplate",
+  "description": "React applet boilerplate for a plugable component of a website.",
   "main": "./index.js",
   "author": "Jesse Bird <creativefeather@outlook.com> (http://codedreaming.ninja)",
   "license": "MIT",
