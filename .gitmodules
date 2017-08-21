@@ -1,0 +1,4 @@
+[submodule "src/frontend"]
+	path = src/frontend
+	url = https://github.com/creativefeather/boilerplate.git
+	branch = frontend
