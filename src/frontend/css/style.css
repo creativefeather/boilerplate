@@ -1,0 +1,18 @@
+/* SMACSS categories */
+/* Base rules are the defaults. They are almost exclusively single element selectors but it could include attribute selectors, pseudo-class selectors, child selectors or sibling selectors. Essentially, a base style says that wherever this element is on the page, it should look like this. */
+/*
+ * Layout rules divide the page into sections. Layouts hold one or more modules together.
+ *
+ * SMACSS -- Guidlines
+ * 1) Use ID selectors on main layout areas
+ * 2) l-prefix class names
+ */
+/* Layout + Layout State Rules */
+/*** MODULES ***/
+/*** END MODULES ***/
+/* Helpers */
+.hide {
+  display: none; }
+
+/* If the background property of an element is set 'after' .bg-clip-text in the CSS, the text will remain transparent and the background-clip will be removed.  Essentially, the text vanishes and the background spills out and fills it's contianing element. */
+/* State Helpers */
