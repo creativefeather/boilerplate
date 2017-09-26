@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/client/app.js',
   output: {
     path: path.resolve(__dirname, './src/public/bundle'),
-    filename: 'shktool.bundle.js'
+    filename: 'bundle.js'
   },
   module: {
     rules: [
