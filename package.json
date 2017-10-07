@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "dev:start": "gulp",
     "dev:server": "nodemon ./src/server",
     "dev:bundle": "webpack -wd"
   },
@@ -25,8 +26,11 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-webpack": "^1.5.0",
     "nodemon": "^1.12.1",
     "webpack": "^3.6.0"
   },

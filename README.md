@@ -1,0 +1,1 @@
+1) Add a 'config' folder in the root directory with at least an 'env.json' file.
