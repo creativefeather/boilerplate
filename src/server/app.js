@@ -9,19 +9,23 @@ const assert = require('assert'),
 let app = module.exports = express();
 
 // *** Initialize Db ***
-MongoClient = require('mongodb').MongoClient;
+if (config.db && config.db.host) {
+  MongoClient = require('mongodb').MongoClient;
 
-let uri = `mongodb://${config.db.host}:${config.db.port}/${config.db.database}`;
+  let uri = `mongodb://${config.db.host}:${config.db.port}/${config.db.database}`;
 
-// Initialize connection once
-MongoClient.connect(uri, function(err, database) {
-  assert.equal(null, err);
+  // Initialize connection once
+  MongoClient.connect(uri, function(err, database) {
+    assert.equal(null, err);
 
-  console.log("Successfully connected to server");
+    console.log("Successfully connected to server");
 
-  app.locals.db = database;
-});
-
+    app.locals.db = database;
+  });
+}
+else {
+  console.log('Db not configured');
+}
 // *** View Engine Setup ***
 app.engine('html', engines.nunjucks);
 app.set('view engine', 'html');

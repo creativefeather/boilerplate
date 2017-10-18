@@ -73,7 +73,11 @@ gulp.task('browser-sync', ['nodemon'], function() {
 
 
 // *** React ***
-let reactFiles = path.join(__dirname, './src/client/**/*.js');
+let reactFiles = [
+  path.join(__dirname, './src/client/**/*.js'),
+  path.join(__dirname, './src/client/**/*.css'),
+  path.join(__dirname, './src/lib/**/*.js')
+];
 function bundle() {
   return gulp.src(webpackConfig.entry.reactApp)
     .pipe(gulpWebpack(webpackConfig, webpack))

@@ -1,4 +1,8 @@
 {
-  "src": ["src/*"],
-  "ignore": ["src/app/views/*"]
+  "src": ["src/"],
+  "ignore": [
+    "src/server/views/",
+    "src/client/",
+    "src/public/"
+  ]
 }
