@@ -7,42 +7,22 @@ const gulp = require('gulp'),
       reload      = browserSync.reload,
       webpack     = require('webpack');  // Ensure we are using our version of webpack instead of the one that came with gulp-webpack.
 
-const BROWSER_SYNC_RELOAD_DELAY = 0;
 const webpackConfig = require('./webpack.config');
-
-// const config = {
-//   gulp: gulp,
-//   outDir: path.join(__dirname, './src/public'),
-//   sync: { reload: reload }
-// }
-
-
+const src = '../src';
 
 // *** Nodemon ***
 gulp.task('nodemon', function (cb) {
   var called = false;
-  return nodemon({
-    
-    // nodemon our expressjs server
-    script: './src/server/index.js',
-
-    // watch core server file(s) that require server restart on change
-    watch: [
-      'src/server/**/*.js'
-    ]
-  })
+  return nodemon(require('./nodemon'))
     .on('start', function onStart() {
       // ensure start only got called once
       if (!called) { cb(); }
       called = true;
     })
     .on('restart', function onRestart() {
-      // reload connected browsers after a slight delay
-      setTimeout(function reload() {
-        browserSync.reload({
-          stream: false
-        });
-      }, BROWSER_SYNC_RELOAD_DELAY);
+      browserSync.reload({
+        stream: false
+      });
     });
 });
 
@@ -54,9 +34,7 @@ gulp.task('nodemon', function (cb) {
  */
 gulp.task('browser-sync', ['nodemon'], function() {
   // for more browser-sync config options: http://www.browsersync.io/docs/options/
-  browserSync({
-    // server: { baseDir: "./app" }
-   
+  browserSync({   
     // informs browser-sync to proxy our expressjs app which would run at the following location
     proxy: `http://${config.host}:${config.port}`,
 
@@ -74,14 +52,14 @@ gulp.task('browser-sync', ['nodemon'], function() {
 
 // *** React ***
 let reactFiles = [
-  path.join(__dirname, './src/client/**/*.js'),
-  path.join(__dirname, './src/client/**/*.css'),
-  path.join(__dirname, './src/lib/**/*.js')
+  path.join(__dirname, src, 'client/**/*.js'),
+  path.join(__dirname, src, 'client/**/*.css'),
+  path.join(__dirname, src, 'lib/**/*.js')
 ];
 function bundle() {
   return gulp.src(webpackConfig.entry.reactApp)
     .pipe(gulpWebpack(webpackConfig, webpack))
-    .pipe(gulp.dest('./src/public/bundle'))
+    .pipe(gulp.dest(webpackConfig.output.path))
     .on('end', function() {
       reload({ stream: false });
     });

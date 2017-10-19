@@ -6,7 +6,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <h1 className={css.heading}>Hello App!!! </h1>
+      <h1 className={css.heading}>Hello App!</h1>
     )
   }
 }

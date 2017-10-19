@@ -1,8 +1,12 @@
 {
+  "script": "./src/server/index.js",
   "src": ["src/"],
   "ignore": [
     "src/server/views/",
     "src/client/",
     "src/public/"
+  ],
+  "watch": [
+    "src/server/**/*.js"
   ]
 }

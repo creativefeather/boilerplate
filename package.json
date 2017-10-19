@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev:start": "gulp",
+    "dev": "gulp --gulpfile ./config/gulpfile.js --cwd .",
     "dev:server": "nodemon ./src/server",
     "dev:bundle": "webpack -wd"
   },
@@ -35,6 +35,9 @@
     "gulp-webpack": "^1.5.0",
     "json-loader": "^0.5.7",
     "nodemon": "^1.12.1",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.8",
     "style-loader": "^0.19.0",
     "webpack": "^3.6.0"
   },
