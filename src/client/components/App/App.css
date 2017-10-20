@@ -1,5 +1,5 @@
+@import 'styles';
+
 .heading {
-  background: orange;
   color: rgb(67, 16, 90);
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
