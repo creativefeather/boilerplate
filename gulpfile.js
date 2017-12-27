@@ -4,6 +4,7 @@ const path        = require('path'),
       gulp        = require("gulp"),
       babel       = require("gulp-babel"),
       concat      = require("gulp-concat"),
+      nunjucks    = require("gulp-nunjucks"),
       postcss     = require("gulp-postcss"),
       sourcemaps  = require("gulp-sourcemaps");
 
@@ -68,6 +69,7 @@ gulp.task("postcss", function () {
 // *** HTML ***
 gulp.task("html", function () {
   return gulp.src(config.html)
+    .pipe(nunjucks.compile())
     .pipe(gulp.dest(config.dest));
 });
 
@@ -103,6 +105,8 @@ gulp.task("babel-watch", ["babel"], function (done) {
   done();
 });
 
+
+// *** DEFAULT TASK ***
 gulp.task("default", [
   "html",
   "postcss",
