@@ -11,15 +11,29 @@ const path        = require('path'),
 const config = {
   src: "src",
   dest: "dist",
-  postcssPlugins: [
-    require('precss'),
-    require('autoprefixer')
-  ]
+  postcssPlugins: require("./postcss.config")
 }
 
-config.html = path.join(config.src, "/**/*.html");
-config.css = path.join(config.src, "/**/*.css");
-config.js = path.join(config.src, "/**/*.js");
+config.html = {
+  src: path.join(config.src, "/client/**/*.html"),
+  watch: [
+    path.join(config.src, "/client/**/*.html"),
+    path.join(config.src, "/client/**/*.njk")
+  ]
+};
+
+config.css = {
+  src: path.join(config.src, "/client/**/*.css"),
+  watch: [
+    path.join(config.src, "/client/**/*.css"),
+    path.join(config.src, "/client/**/*.styl")
+  ]
+};
+
+config.js = {
+  src: path.join(config.src, "/**/*.js"),
+  watch: path.join(config.src, "/**/*.js")
+};
 
 /**
  * @task Browser-Sync task
@@ -31,33 +45,30 @@ gulp.task('browser-sync', function() {
       baseDir: config.dest
     },
 
-    // informs browser-sync to proxy our expressjs app which would run at the following location
+    // Proxy app at the following location
     //proxy: `http://${config.host}:${config.port}`,
 
-    // informs browser-sync to use the following port for the proxied app
-    // notice that the default port is 3000, which would clash with our expressjs
+    // Use this port for the proxied app.
     //port: 4000,
 
-    // open the proxied app in chrome
+    // open in chrome
     browser: ['chrome']
     
   });
 });
 
-// *** BABEL ***
-gulp.task("babel", function () {
-  return gulp.src(config.js)
-    .pipe(sourcemaps.init())
-    .pipe(babel())
-    .pipe(concat("all.js"))
-    .pipe(sourcemaps.write("."))
+
+// *** HTML ***
+gulp.task("html", function () {
+  return gulp.src(config.html.src)
+    .pipe(nunjucks.compile())
     .pipe(gulp.dest(config.dest));
 });
 
 
 // *** POSTCSS ***
 gulp.task("postcss", function () {
-  return gulp.src(config.css)
+  return gulp.src(config.css.src)
       .pipe(sourcemaps.init())
       .pipe(postcss(config.postcssPlugins))
       .pipe(sourcemaps.write('.'))
@@ -66,10 +77,13 @@ gulp.task("postcss", function () {
 });
 
 
-// *** HTML ***
-gulp.task("html", function () {
-  return gulp.src(config.html)
-    .pipe(nunjucks.compile())
+// *** BABEL ***
+gulp.task("babel", function () {
+  return gulp.src(config.js.src)
+    .pipe(sourcemaps.init())
+    .pipe(babel())
+    .pipe(concat("all.js"))
+    .pipe(sourcemaps.write("."))
     .pipe(gulp.dest(config.dest));
 });
 
@@ -81,15 +95,15 @@ gulp.task("watch", function () {
   }
 
   // Watch HTML
-  gulp.watch(config.html, ["html-watch"])
+  gulp.watch(config.html.watch, ["html-watch"])
   .on('change', logChange);
 
   // Watch CSS
-  gulp.watch(config.css, ["postcss"])
+  gulp.watch(config.css.watch, ["postcss"])
   .on('change', logChange);
 
   // Watch JS
-  gulp.watch(config.js, ["babel-watch"])
+  gulp.watch(config.js.watch, ["babel-watch"])
     .on('change', logChange);
 });
 
