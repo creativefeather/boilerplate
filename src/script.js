@@ -1,1 +1,1 @@
-alert('Hello from Javascript!');
+document.getElementById('h1').innerText = "Hello World!";

@@ -17,11 +17,13 @@
     "autoprefixer": "^7.2.3",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.21.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-postcss": "^7.0.0",
     "gulp-sourcemaps": "^2.6.2",
+    "nodemon": "^1.14.3",
     "precss": "^2.0.0"
   }
 }
